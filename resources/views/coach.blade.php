@@ -402,8 +402,6 @@
     </div>
 
     <!-- js -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
     <script type="text/javascript" src="{{asset('asset/js/jquery-2.2.3.min.js')}}"></script>
     <!-- //js -->
     <!-- script for seat selection -->
@@ -426,7 +424,7 @@
             } else if($("#Numseats").val() >7){
                 alert("Please select less then or equal 7 Seats");
             } else if(rmseat < $("#Numseats").val()){
-                alert('No seat remaining');
+                alert('Not fit in your critarea');
             }else {
                 $(".inputForm *").prop("disabled", true);
                 $(".seatStructure *").prop("disabled", false);
@@ -466,12 +464,15 @@
                     success:function(data){
                         console.log(data.success);
                         if(data.success){
+                            alert('seat reserved');
                             $('#nameDisplay').val(allNameVals);
                             $('#NumberDisplay').val(allNumberVals);
                             $('#seatsDisplay').val(allSeatsVals);
-                            toastr.success('Success messages');    
+                             function timedRefresh(timeoutPeriod=5000) {
+                                setTimeout("location.reload(true);",timeoutPeriod);
+                            }  
                         }else{
-                            toastr.error('errors messages');
+                            alert('somthing went wrong!!!');
                         }
                         
                     }
